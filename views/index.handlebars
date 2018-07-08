@@ -1,24 +1,70 @@
-<h1>Burgers to Eat</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 text-center" id="top-bar">
+			<h1>EAT DA BURGER!</h1>
 
+		</div>
+		<div class="col-xs-6 text-center" class="task">
+			<div class="row">
+				{{#each burger_data}} {{#unless this.devoured}}
+				<div class="col-xs-9 text-center">
+					<pre>{{this.id}}. {{this.burger_name}}</pre>
+				</div>
+				<div class="col-xs-3 text-center">
+					<form method="POST" action="/burgers/update?_method=PUT" class="button-size">
+						<input type="hidden" name="burger_id" type="text" value={{this.id}}>
+						<br>
+						<button type="submit" class="btn btn-default">DEVOUR IT!</button>
+					</form>
+				</div>
+				{{/unless}} {{/each}}
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-6 text-center" class="task">
+		{{#each burger_data}} {{#if this.devoured}}
+		<input class="form-control" type="text" placeholder="{{this.id}}. {{this.burger_name}}" readonly> {{/if}} {{/each}}
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 text-center enter_selection">
+			<form action="/burgers/create" method="POST">
+				<input type="text" name="burger_name" class="form-control" value="" id="enter_text">
+				<button type="submit" class="btn btn-primary" id="text-enter-button">SUBMIT</button>
+			</form>
+			<p>Enter in a burger you want to eat</p>
+		</div>
+	</div>
+</div>
+
+
+{{!--
 <ul>
 	{{#each burgers}}
 	<li>
-		<h3>{{this.id}}. {{this.burger}}  <span><button class="burgerBtn btn btn-danger">Devour!</button></span></h3>
+		<h3>{{this.id}}. {{this.burger}}
+			<span>
+				<button class="burgerBtn btn btn-danger">Devour!</button>
+			</span>
+		</h3>
 	</li>
 	{{/each}}
 </ul>
 
 <h2>Add a burger you want to eat</h2>
 <form method="POST" action="/create">
-<textarea type="text" name="burger"></textarea>
-<br>
-<button type="submit" class="btn btn-warning">SAVE BURGER</button>
+	<textarea type="text" name="burger"></textarea>
+	<br>
+	<button type="submit" class="btn btn-warning">SAVE BURGER</button>
 </form>
 
 <h2>Update a Burger</h2>
 <form method="POST" action="/update?_method=PUT">
-<input type="text" name="id" placeholder="id">
-<textarea type="text" name="burger" placeholder="What do you want to change about this burger?">
+	<input type="text" name="id" placeholder="id">
+	<textarea type="text" name="burger" placeholder="What do you want to change about this burger?">
 </textarea>
-<button type="submit" class="btn btn-classic">UPDATE BURGER</button>
-</form>
+	<button type="submit" class="btn btn-classic">UPDATE BURGER</button>
+</form> --}}
